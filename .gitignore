@@ -6,4 +6,5 @@
 #Log file
 *.log
 
-
+# output
+out/
