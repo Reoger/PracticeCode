@@ -48,7 +48,8 @@ public class Question19 {
         }
 
         if (indexPatterns + 1 < patterns.length && patterns[indexPatterns + 1] == '*') {
-            if ((indexChars < chars.length && patterns[indexPatterns] == chars[indexChars]) || (patterns[indexPatterns] == '.' && indexChars < chars.length)) {
+            if ((indexChars < chars.length && patterns[indexPatterns] == chars[indexChars])
+                    || (patterns[indexPatterns] == '.' && indexChars < chars.length)) {
                 return matchPatterns(chars, indexChars + 1, patterns, indexPatterns + 2) ||
                         matchPatterns(chars, indexChars, patterns, indexPatterns + 2) ||
                         matchPatterns(chars, indexChars + 1, patterns, indexPatterns);

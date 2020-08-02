@@ -21,6 +21,9 @@ public class Question37 {
         root = node;
         TreeNode.printfTree(root);
         System.out.println();
+        TreeNode.inOrder(root);
+
+        System.out.println();
         System.out.println(data);
 
         TreeNode result = Deserialize(data);
@@ -32,10 +35,10 @@ public class Question37 {
     String Serialize(TreeNode root) {
         StringBuilder sb = new StringBuilder();
         if (root == null) {
-            return "#!";
+            return "null,";
         }
 
-        sb.append(root.val).append("!");
+        sb.append(root.val).append(",");
         sb.append(Serialize(root.left));
         sb.append(Serialize(root.right));
         return sb.toString();
@@ -47,24 +50,27 @@ public class Question37 {
         if (str == null || str.length() == 0) {
             return null;
         }
+        index = -1;
+        return DeserializeCore(str.split(","));
+    }
 
+    private TreeNode DeserializeCore(String[] nodes) {
         index++;
-        String[] nums = str.split("!");
-
-        if (nums.length <= index) {
+        if(nodes.length <= index) {
             return null;
         }
 
-        String val = nums[index];
-        if ("#".equals(val)) {
+        String val = nodes[index];
+        if("null".equals(val)) {
             return null;
         }
 
         TreeNode root = new TreeNode(Integer.valueOf(val));
-        root.left = Deserialize(str);
-        root.right = Deserialize(str);
+        root.left = DeserializeCore(nodes);
+        root.right = DeserializeCore(nodes);
 
         return root;
     }
+
 
 }

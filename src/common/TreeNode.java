@@ -1,6 +1,9 @@
 package common;
 
 
+import org.junit.Test;
+import java.util.Stack;
+
 public class TreeNode {
     public int val;
     public TreeNode left;
@@ -33,6 +36,33 @@ public class TreeNode {
             System.out.print(root.val + " -> ");
             printfTree(root.left);
             printfTree(root.right);
+        }
+    }
+
+    public static void inOrder(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        TreeNode tempNode = root;
+
+        while (!stack.isEmpty()) {
+            if (tempNode != null && tempNode.left != null) {
+                stack.push(tempNode.left);
+                tempNode = tempNode.left;
+            } else {
+                tempNode = stack.pop();
+                System.out.print(tempNode.val + " -> ");
+
+                if (tempNode.right != null) {
+                    stack.push(tempNode.right);
+                    tempNode = tempNode.right;
+                } else {
+                    tempNode = null;
+                }
+            }
+
         }
     }
 
